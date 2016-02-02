@@ -17,7 +17,7 @@
     "music",
     "beats"
   ],
-  "author": "Brandon Freitag",
+  "author": "Brandon Freitag <freitagbr@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/freitagbr/step-sequencer/issues"
