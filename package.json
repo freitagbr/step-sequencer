@@ -1,0 +1,29 @@
+{
+  "name": "step-sequencer",
+  "version": "0.0.0",
+  "description": "A step-sequencer for Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freitagbr/step-sequencer.git"
+  },
+  "keywords": [
+    "step",
+    "sequencer",
+    "sound",
+    "music",
+    "beats"
+  ],
+  "author": "Brandon Freitag",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/freitagbr/step-sequencer/issues"
+  },
+  "homepage": "https://github.com/freitagbr/step-sequencer#readme",
+  "dependencies": {
+    "nanotimer": "^0.3.14"
+  }
+}
