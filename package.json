@@ -1,6 +1,6 @@
 {
   "name": "step-sequencer",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A step-sequencer for Node.js",
   "main": "index.js",
   "scripts": {
