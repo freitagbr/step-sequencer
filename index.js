@@ -43,6 +43,7 @@ StepSequencer.prototype.resume = function () {
 };
 
 StepSequencer.prototype.stop = function () {
+  if (!this._playing) return;
   this._playing = false;
   this.timer.clearInterval();
 };
