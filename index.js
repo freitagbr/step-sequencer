@@ -5,9 +5,9 @@ var inherits = require('util').inherits;
 var NanoTimer = require('nanotimer');
 
 function StepSequencer(tempo, division, sequence) {
-  this.tempo = tempo;
-  this.division = division;
-  this.sequence = sequence;
+  this.tempo = tempo || 120;
+  this.division = division || 4;
+  this.sequence = sequence || [];
   this.step = 0;
   this.timer = new NanoTimer();
   this.timeout = Math.floor((60 / (tempo * division)) * 10e8) + 'n';
