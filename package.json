@@ -4,7 +4,7 @@
   "description": "A step-sequencer for Node.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -25,5 +25,8 @@
   "homepage": "https://github.com/freitagbr/step-sequencer#readme",
   "dependencies": {
     "nanotimer": "^0.3.14"
+  },
+  "devDependencies": {
+    "mocha": "^2.4.5"
   }
 }
