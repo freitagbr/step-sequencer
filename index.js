@@ -11,6 +11,7 @@ function StepSequencer(tempo, division, sequence) {
   this.step = 0;
   this.timer = new NanoTimer();
   this.timeout = Math.floor((60 / (tempo * division)) * 10e8) + 'n';
+  this._playing = false;
   EventEmitter.call(this);
 }
 
@@ -24,7 +25,9 @@ StepSequencer.prototype._advance = function () {
 
 StepSequencer.prototype.play = function () {
   var self = this;
+  if (self._playing) return;
   self.step = 0;
+  self._playing = true;
   self.timer.setInterval(function () {
     self._advance.call(self);
   }, '', self.timeout);
@@ -32,12 +35,15 @@ StepSequencer.prototype.play = function () {
 
 StepSequencer.prototype.resume = function () {
   var self = this;
+  if (self._playing) return;
+  self._playing = true;
   self.timer.setInterval(function () {
     self._advance.call(self);
   }, '', self.timeout);
 };
 
 StepSequencer.prototype.stop = function () {
+  this._playing = false;
   this.timer.clearInterval();
 };
 
