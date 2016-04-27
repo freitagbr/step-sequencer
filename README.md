@@ -7,7 +7,10 @@ An EventEmitter-based step-sequencer for Node.js.
 var StepSequencer = require('step-sequencer');
 
 // Instantiate a new StepSequencer object
-var stepSequencer = new StepSequencer(120, 4, [0, 1, 2, 3]);
+var tempo = 120;
+var division = 4;
+var sequence = [0, 1, 2, 3];
+var stepSequencer = new StepSequencer(tempo, division, sequence);
 
 // The StepSequencer emits the number of
 // the step when that step is to be played
@@ -32,7 +35,18 @@ stepSequencer.play();
 // 3 ...
 ```
 
-# Methods
+# API
+
+## StepSequencer.constructor
+
+Constructrs the `StepSequencer` object:
+```javascript
+var stepSequencer = new StepSequencer(tempo = 120, division = 4, sequence = []);
+```
+
+- `tempo` is the tempo of playback
+- `division` is the number of beats per measure
+- `sequence` is the sequence of data to be emitted
 
 ## StepSequencer.prototype.play
 
