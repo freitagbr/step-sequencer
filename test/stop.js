@@ -3,13 +3,14 @@
 var assert = require('assert');
 var StepSequencer = require('../index');
 
-describe('.stop()', function () {
+describe('#stop()', function () {
 
   var tempo = 10000;
   var division = 4;
   var sequence = [0, 1, 2, 3];
 
   it('should stop correctly', function (done) {
+
     var stepSequencer = new StepSequencer(tempo, division, sequence);
 
     var stopped;
@@ -29,9 +30,11 @@ describe('.stop()', function () {
     });
 
     stepSequencer.play();
+
   });
 
-  it('should make ._playing false after .stop() is called', function (done) {
+  it('should set the internal state correctly', function () {
+
     var stepSequencer = new StepSequencer(tempo, division, sequence);
 
     stepSequencer.play();
@@ -39,6 +42,6 @@ describe('.stop()', function () {
 
     assert(!stepSequencer._playing);
 
-    done();
   });
+
 });

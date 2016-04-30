@@ -3,13 +3,14 @@
 var assert = require('assert');
 var StepSequencer = require('../index');
 
-describe('.play()', function () {
+describe('#play()', function () {
 
   var tempo = 10000;
   var division = 4;
   var sequence = [0, 1, 2, 3];
 
   it('should emit all of the steps', function (done) {
+
     var stepSequencer = new StepSequencer(tempo, division, sequence);
 
     var zero = false;
@@ -36,9 +37,11 @@ describe('.play()', function () {
     });
 
     stepSequencer.play();
+
   });
 
   it('should emit the steps in order', function (done) {
+
     var stepSequencer = new StepSequencer(tempo, division, sequence);
 
     var seq = '';
@@ -55,50 +58,50 @@ describe('.play()', function () {
     .on('3', function (data) {
       seq += data;
 
-      assert(seq === '0123');
+      assert.equal(seq, '0123');
 
       stepSequencer.stop();
       done();
     });
 
     stepSequencer.play();
+
   });
 
   it('should emit the correct data at each step', function (done) {
+
     var stepSequencer = new StepSequencer(tempo, division, sequence);
 
     stepSequencer.on('0', function (data) {
-      assert(data === sequence[0]);
+      assert.equal(data, sequence[0]);
     })
     .on('1', function (data) {
-      assert(data === sequence[1]);
+      assert.equal(data, sequence[1]);
     })
     .on('2', function (data) {
-      assert(data === sequence[2]);
+      assert.equal(data, sequence[2]);
     })
     .on('3', function (data) {
-      assert(data === sequence[3]);
+      assert.equal(data, sequence[3]);
 
       stepSequencer.stop();
       done();
     });
 
     stepSequencer.play();
+
   });
 
-  it('should make ._playing true after .play() is called', function (done) {
+  it('should set the internal state correctly', function () {
+
     var stepSequencer = new StepSequencer(tempo, division, sequence);
 
     stepSequencer.play();
-
     assert(stepSequencer._playing);
-
     stepSequencer.play();
-
     assert(stepSequencer._playing);
-
     stepSequencer.stop();
-    done();
+
   });
 
 });

@@ -3,48 +3,86 @@
 var assert = require('assert');
 var StepSequencer = require('../index');
 
-describe('object constructor', function () {
+describe('StepSequencer constructor', function () {
 
-  it('should construct properly', function (done) {
+  it('should throw when tempo is not a number', function () {
+
+    try {
+      var stepSequencer = new StepSequencer('120');
+    }
+    catch (e) {
+      return;
+    }
+
+    assert.fail();
+
+  });
+
+  it('should throw when division is not a number', function () {
+
+    try {
+      var stepSequencer = new StepSequencer(120, '4');
+    }
+    catch (e) {
+      return;
+    }
+
+    assert.fail();
+
+  });
+
+  it('should throw when sequence is not an array', function () {
+
+    try {
+      var stepSequencer = new StepSequencer(120, 4, {});
+    }
+    catch (e) {
+      return;
+    }
+
+    assert.fail();
+
+  });
+
+  it('should use correct defaults', function () {
+
+    var stepSequencer = new StepSequencer();
+
+    assert.equal(stepSequencer.tempo, 120);
+    assert.equal(stepSequencer.division, 4);
+    assert.equal(stepSequencer.sequence.length, 0);
+
+  });
+
+  it('should construct properly', function () {
+
     var tempo = 160;
     var division = 2;
     var sequence = [0, 1];
 
     var stepSequencer = new StepSequencer(tempo, division, sequence);
 
-    assert(stepSequencer.tempo === 160);
-    assert(stepSequencer.division === 2);
-    assert(stepSequencer.sequence.length === 2);
-    assert(stepSequencer.sequence[0] === 0);
-    assert(stepSequencer.sequence[1] === 1);
-    assert(stepSequencer.step === 0);
-    assert(stepSequencer.timer);
-    assert(typeof stepSequencer.timer === 'object');
-    assert(stepSequencer.timeout === '187500000n');
-    assert(stepSequencer._playing === false);
+    // properties
+    assert.equal(stepSequencer.tempo, 160);
+    assert.equal(stepSequencer.division, 2);
+    assert.equal(stepSequencer.sequence.length, 2);
+    assert.equal(stepSequencer.sequence[0], 0);
+    assert.equal(stepSequencer.sequence[1], 1);
+    assert.equal(stepSequencer.step, 0);
+    assert.equal(typeof stepSequencer.timer, 'object');
+    assert.equal(stepSequencer.timeout, '187500000n');
+    assert.equal(stepSequencer._playing, false);
 
-    assert(stepSequencer._advance);
-    assert(typeof stepSequencer._advance === 'function');
-    assert(stepSequencer.play);
-    assert(typeof stepSequencer.play === 'function');
-    assert(stepSequencer.resume);
-    assert(typeof stepSequencer.resume === 'function');
-    assert(stepSequencer.stop);
-    assert(typeof stepSequencer.stop === 'function');
-    assert(stepSequencer.on);
-    assert(typeof stepSequencer.on === 'function');
+    // methods
+    assert.equal(typeof stepSequencer._advance, 'function');
+    assert.equal(typeof stepSequencer.play, 'function');
+    assert.equal(typeof stepSequencer.resume, 'function');
+    assert.equal(typeof stepSequencer.stop, 'function');
+    assert.equal(typeof stepSequencer.setTempo, 'function');
+    assert.equal(typeof stepSequencer.setSequence, 'function');
+    assert.equal(typeof stepSequencer.on, 'function');
+    assert.equal(typeof stepSequencer.emit, 'function');
 
-    done();
-  });
-
-  it('should use correct defaults', function (done) {
-    var stepSequencer = new StepSequencer();
-
-    assert(stepSequencer.tempo === 120);
-    assert(stepSequencer.division === 4);
-    assert(stepSequencer.sequence.length === 0);
-
-    done();
   });
 
 });

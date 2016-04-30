@@ -13,6 +13,10 @@ function loop() {
 }
 
 function StepSequencer(tempo, division, sequence) {
+  if (tempo && typeof tempo !== 'number') throw new TypeError('Tempo must be a number');
+  if (division && typeof division !== 'number') throw new TypeError('Division must be a number');
+  if (sequence && !(sequence instanceof Array)) throw new TypeError('Sequence must be an array');
+
   this.tempo = tempo || 120;
   this.division = division || 4;
   this.sequence = sequence || [];
@@ -51,13 +55,17 @@ StepSequencer.prototype.stop = function () {
 };
 
 StepSequencer.prototype.setTempo = function (tempo) {
-  this.tempo = tempo || 120;
+  if (typeof tempo !== 'number') throw new TypeError('Tempo must be a number');
+  this.tempo = tempo;
   this.timeout = Math.floor((60 / (this.tempo * this.division)) * 10e8) + 'n';
 }
 
 StepSequencer.prototype.setSequence = function (division, sequence) {
-  this.division = division || 4;
-  this.sequence = sequence || [];
+  if (typeof division !== 'number') throw new TypeError('Division must be a number');
+  if (!(sequence instanceof Array)) throw new TypeError('Sequence must be an array');
+
+  this.division = division;
+  this.sequence = sequence;
   this.timeout = Math.floor((60 / (this.tempo * this.division)) * 10e8) + 'n';
 }
 
