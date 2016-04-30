@@ -77,6 +77,22 @@ stepSequencer.resume();
 // 3 ...
 ```
 
+## StepSequencer.prototype.setTempo
+
+Sets the tempo, even if the `stepSequencer` is playing:
+```javascript
+stepSequencer.setTempo(120);
+```
+
+## StepSequencer.prototype.setSequence
+
+Sets the division and sequence, even if the `stepSequencer` is playing.
+
+The tempo is updated as well, if the division changes:
+```javascript
+stepSequencer.setSequence(4, [1, 2, 3, 4]);
+```
+
 # License
 
 MIT
