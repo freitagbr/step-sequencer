@@ -18,7 +18,7 @@ function StepSequencer(tempo, division, sequence) {
   this.sequence = sequence || [];
   this.step = 0;
   this.timer = new NanoTimer();
-  this.timeout = Math.floor((60 / (tempo * division)) * 10e8) + 'n';
+  this.timeout = Math.floor((60 / (this.tempo * this.division)) * 10e8) + 'n';
   this._playing = false;
   EventEmitter.call(this);
 }
@@ -47,6 +47,18 @@ StepSequencer.prototype.resume = function () {
 StepSequencer.prototype.stop = function () {
   if (!this._playing) return;
   this._playing = false;
+  this.timer.clearTimeout();
 };
+
+StepSequencer.prototype.setTempo = function (tempo) {
+  this.tempo = tempo || 120;
+  this.timeout = Math.floor((60 / (this.tempo * this.division)) * 10e8) + 'n';
+}
+
+StepSequencer.prototype.setSequence = function (division, sequence) {
+  this.division = division || 4;
+  this.sequence = sequence || [];
+  this.timeout = Math.floor((60 / (this.tempo * this.division)) * 10e8) + 'n';
+}
 
 module.exports = StepSequencer;
