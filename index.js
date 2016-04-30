@@ -4,6 +4,14 @@ var EventEmitter = require('events').EventEmitter;
 var inherits = require('util').inherits;
 var NanoTimer = require('nanotimer');
 
+function loop() {
+  var self = this;
+  self.timer.setTimeout(function () {
+    self._advance.call(self);
+    if (self._playing) loop.call(self);
+  }, '', self.timeout);
+}
+
 function StepSequencer(tempo, division, sequence) {
   this.tempo = tempo || 120;
   this.division = division || 4;
@@ -24,28 +32,21 @@ StepSequencer.prototype._advance = function () {
 }
 
 StepSequencer.prototype.play = function () {
-  var self = this;
-  if (self._playing) return;
-  self.step = 0;
-  self._playing = true;
-  self.timer.setInterval(function () {
-    self._advance.call(self);
-  }, '', self.timeout);
+  if (this._playing) return;
+  this.step = 0;
+  this._playing = true;
+  loop.call(this);
 };
 
 StepSequencer.prototype.resume = function () {
-  var self = this;
-  if (self._playing) return;
-  self._playing = true;
-  self.timer.setInterval(function () {
-    self._advance.call(self);
-  }, '', self.timeout);
+  if (this._playing) return;
+  this._playing = true;
+  loop.call(this);
 };
 
 StepSequencer.prototype.stop = function () {
   if (!this._playing) return;
   this._playing = false;
-  this.timer.clearInterval();
 };
 
 module.exports = StepSequencer;
