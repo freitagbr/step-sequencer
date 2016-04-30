@@ -4,58 +4,48 @@ var assert = require('assert');
 var StepSequencer = require('../index');
 
 describe('StepSequencer constructor', function () {
-
   it('should throw when tempo is not a number', function () {
-
     try {
       var stepSequencer = new StepSequencer('120');
-    }
-    catch (e) {
+      stepSequencer.play();
+    } catch (e) {
       return;
     }
 
     assert.fail();
-
   });
 
   it('should throw when division is not a number', function () {
-
     try {
       var stepSequencer = new StepSequencer(120, '4');
-    }
-    catch (e) {
+      stepSequencer.play();
+    } catch (e) {
       return;
     }
 
     assert.fail();
-
   });
 
   it('should throw when sequence is not an array', function () {
-
     try {
       var stepSequencer = new StepSequencer(120, 4, {});
-    }
-    catch (e) {
+      stepSequencer.play();
+    } catch (e) {
       return;
     }
 
     assert.fail();
-
   });
 
   it('should use correct defaults', function () {
-
     var stepSequencer = new StepSequencer();
 
     assert.equal(stepSequencer.tempo, 120);
     assert.equal(stepSequencer.division, 4);
     assert.equal(stepSequencer.sequence.length, 0);
-
   });
 
   it('should construct properly', function () {
-
     var tempo = 160;
     var division = 2;
     var sequence = [0, 1];
@@ -74,7 +64,6 @@ describe('StepSequencer constructor', function () {
     assert.equal(stepSequencer._playing, false);
 
     // methods
-    assert.equal(typeof stepSequencer._advance, 'function');
     assert.equal(typeof stepSequencer.play, 'function');
     assert.equal(typeof stepSequencer.resume, 'function');
     assert.equal(typeof stepSequencer.stop, 'function');
@@ -82,7 +71,5 @@ describe('StepSequencer constructor', function () {
     assert.equal(typeof stepSequencer.setSequence, 'function');
     assert.equal(typeof stepSequencer.on, 'function');
     assert.equal(typeof stepSequencer.emit, 'function');
-
   });
-
 });
