@@ -4,7 +4,8 @@
   "description": "A step-sequencer for Node.js",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "lint": "eslint . || true"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "nanotimer": "^0.3.14"
   },
   "devDependencies": {
+    "eslint": "^1.10.3",
     "mocha": "^2.4.5"
   }
 }
