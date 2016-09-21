@@ -49,11 +49,11 @@ function setSequence(division, sequence) {
 
   this.division = division;
   this.sequence = sequence;
-  this.timeout = calcTimeout(this.tempo, this.division)
+  this.timeout = calcTimeout(this.tempo)
 }
 
-function calcTimeout(tempo, division) {
-  return Math.floor((60 / tempo * division) * 10e8) + 'n';
+function calcTimeout(tempo) {
+  return Math.floor((60 / tempo) * 10e8) + 'n';
 }
 
 function StepSequencer(tempo, division, sequence) {
@@ -66,7 +66,7 @@ function StepSequencer(tempo, division, sequence) {
   this.sequence = sequence || [];
   this.step = 0;
   this.timer = new NanoTimer();
-  this.timeout = calcTimeout(this.tempo, this.division)
+  this.timeout = calcTimeout(this.tempo)
   this._playing = false;
   EventEmitter.call(this);
 }
