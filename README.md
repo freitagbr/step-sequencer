@@ -7,7 +7,7 @@ An EventEmitter-based step-sequencer for Node.js.
 var StepSequencer = require('step-sequencer');
 
 // Instantiate a new StepSequencer object
-var tempo = 120;
+var tempo = 120; // beats per minute
 var division = 4;
 var sequence = [0, 1, 2, 3];
 var stepSequencer = new StepSequencer(tempo, division, sequence);
@@ -44,7 +44,7 @@ Constructrs the `StepSequencer` object:
 var stepSequencer = new StepSequencer(tempo = 120, division = 4, sequence = []);
 ```
 
-- `tempo` is the tempo of playback
+- `tempo` is the tempo of playback, in beats i.e. steps per minute
 - `division` is the number of beats per measure
 - `sequence` is the sequence of data to be emitted
 
@@ -79,7 +79,7 @@ stepSequencer.resume();
 
 ## StepSequencer.prototype.setTempo
 
-Sets the tempo, even if the `stepSequencer` is playing:
+Sets the tempo, in beats per minute, even if the `stepSequencer` is playing:
 ```javascript
 stepSequencer.setTempo(120);
 ```
