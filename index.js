@@ -20,9 +20,9 @@ function loop() {
 }
 
 function advance() {
+  if (this.step >= this.division) this.step = 0;
   this.emit('' + this.step, this.sequence[this.step]);
   this.step = (this.step + 1);
-  if (this.step === this.division) this.step = 0;
 }
 
 function resume() {
