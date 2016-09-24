@@ -45,10 +45,10 @@ function setTempo(tempo) {
 
 function setSequence(division, sequence) {
   if (typeof division !== 'number') throw new TypeError('Division must be a number');
-  if (!(sequence instanceof Array)) throw new TypeError('Sequence must be an array');
+  if (sequence && !(sequence instanceof Array)) throw new TypeError('Sequence must be an array');
 
   this.division = division;
-  this.sequence = sequence;
+  this.sequence = sequence || [];
   this.timeout = calcTimeout(this.tempo)
 }
 
