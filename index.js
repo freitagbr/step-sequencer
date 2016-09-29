@@ -40,7 +40,7 @@ function stop() {
 function setTempo(tempo) {
   if (typeof tempo !== 'number') throw new TypeError('Tempo must be a number');
   this.tempo = tempo;
-  this.timeout = calcTimeout(this.tempo, this.division)
+  this.timeout = calcTimeout(this.tempo, this.division);
 }
 
 function setSequence(division, sequence) {
@@ -49,7 +49,7 @@ function setSequence(division, sequence) {
 
   this.division = division;
   this.sequence = sequence || [];
-  this.timeout = calcTimeout(this.tempo)
+  this.timeout = calcTimeout(this.tempo);
 }
 
 function calcTimeout(tempo) {
@@ -66,7 +66,7 @@ function StepSequencer(tempo, division, sequence) {
   this.sequence = sequence || [];
   this.step = 0;
   this.timer = new NanoTimer();
-  this.timeout = calcTimeout(this.tempo)
+  this.timeout = calcTimeout(this.tempo);
   this._playing = false;
   EventEmitter.call(this);
 }
