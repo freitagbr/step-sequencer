@@ -20,9 +20,9 @@ function loop() {
 }
 
 function advance() {
+  if (this.step >= this.division) this.step = 0;
   this.emit('' + this.step, this.sequence[this.step]);
   this.step = (this.step + 1);
-  if (this.step === this.sequence.length) this.step = 0;
 }
 
 function resume() {
@@ -40,16 +40,20 @@ function stop() {
 function setTempo(tempo) {
   if (typeof tempo !== 'number') throw new TypeError('Tempo must be a number');
   this.tempo = tempo;
-  this.timeout = Math.floor((60 / (this.tempo * this.division)) * 10e8) + 'n';
+  this.timeout = calcTimeout(this.tempo, this.division);
 }
 
 function setSequence(division, sequence) {
   if (typeof division !== 'number') throw new TypeError('Division must be a number');
-  if (!(sequence instanceof Array)) throw new TypeError('Sequence must be an array');
+  if (sequence && !(sequence instanceof Array)) throw new TypeError('Sequence must be an array');
 
   this.division = division;
-  this.sequence = sequence;
-  this.timeout = Math.floor((60 / (this.tempo * this.division)) * 10e8) + 'n';
+  this.sequence = sequence || [];
+  this.timeout = calcTimeout(this.tempo);
+}
+
+function calcTimeout(tempo) {
+  return Math.floor((60 / tempo) * 10e8) + 'n';
 }
 
 function StepSequencer(tempo, division, sequence) {
@@ -62,7 +66,7 @@ function StepSequencer(tempo, division, sequence) {
   this.sequence = sequence || [];
   this.step = 0;
   this.timer = new NanoTimer();
-  this.timeout = Math.floor((60 / (this.tempo * this.division)) * 10e8) + 'n';
+  this.timeout = calcTimeout(this.tempo);
   this._playing = false;
   EventEmitter.call(this);
 }
