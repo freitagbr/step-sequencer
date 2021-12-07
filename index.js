@@ -21,8 +21,7 @@ function loop() {
 
 function advance() {
   this.emit('' + this.step, this.sequence[this.step]);
-  this.step = (this.step + 1);
-  if (this.step === this.sequence.length) this.step = 0;
+  this.step = (++this.step) % this.sequence.length;
 }
 
 function resume() {
@@ -50,6 +49,7 @@ function setSequence(division, sequence) {
   this.division = division;
   this.sequence = sequence;
   this.timeout = Math.floor((60 / (this.tempo * this.division)) * 10e8) + 'n';
+  this.step %= sequence.length;
 }
 
 function StepSequencer(tempo, division, sequence) {
